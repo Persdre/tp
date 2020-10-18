@@ -70,7 +70,7 @@ public class IngredientViewSingleCommand extends Command {
         IngredientViewSingleCommand e = (IngredientViewSingleCommand) other;
 
         return target.equals(e.target)
-                && viewIngredientDescriptor.equals(e.viewIngredientDescriptor);
+                && target.equals(e.viewIngredientDescriptor);
     }
 
     public static class ViewIngredientDescriptor {
