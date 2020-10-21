@@ -25,6 +25,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final SalesBook salesBook;
+    private final SalesTimeBook salesTimeBook;
     private final IngredientBook ingredientBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
@@ -34,7 +35,8 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlySalesBook salesBook,
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlySalesBook salesBook, ReadOnlySalesTimeBook
+                        salesTimeBook,
                         ReadOnlyIngredientBook ingredientBook, ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, salesBook, userPrefs);

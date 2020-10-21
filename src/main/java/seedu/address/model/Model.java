@@ -123,6 +123,8 @@ public interface Model {
 
     SalesBook getSalesBook();
 
+    SalesTimeBook getSalesTimeBook();
+
     boolean isEmptySalesBook();
 
     void overwrite(Map<Drink, Integer> salesInput);
