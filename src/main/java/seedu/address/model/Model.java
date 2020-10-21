@@ -18,10 +18,14 @@ public interface Model {
     /** {@code Predicate} that evaluates to true if person's archive status is false. */
     Predicate<Person> PREDICATE_SHOW_ALL_ACTIVE_PERSONS = person ->
             !(person.getArchiveStatus().archiveStatus);
+
     /** {@code Predicate} that evaluates to true if person's archive status is true. */
     Predicate<Person> PREDICATE_SHOW_ALL_ARCHIVED_PERSONS = person -> (
             person.getArchiveStatus().archiveStatus);
-    Predicate<SalesRecordEntry> PREDICATE_SHOW_ALL_SALES = salesRecordEntry -> true;
+
+    Predicate<Ingredient> PREDICATE_SHOW_ALL_INGREDIENTS = unused -> true;
+
+    Predicate<SalesRecordEntry> PREDICATE_SHOW_ALL_SALES_RECORD_ENTRY = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -54,6 +58,11 @@ public interface Model {
     Path getSalesBookFilePath();
 
     /**
+     * Returns the user prefs' ingredient book file path.
+     */
+    Path getIngredientBookFilePath();
+
+    /**
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
@@ -62,6 +71,11 @@ public interface Model {
      * Sets the user prefs' sales book file path.
      */
     void setSalesBookFilePath(Path salesBookFilePath);
+
+    /**
+     * Sets the user prefs' ingredient book file path.
+     */
+    void setIngredientBookFilePath(Path ingredientBookFilePath);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
@@ -108,6 +122,12 @@ public interface Model {
     void addSalesRecordEntry(SalesRecordEntry salesRecordEntry);
 
     /**
+     * Adds an ingredient to the ingredient book.
+     * The ingredient must not already exist in the ingredient book.
+     */
+    public void addIngredient(Ingredient ingredient);
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -116,7 +136,7 @@ public interface Model {
 
     void setIngredient(Ingredient target, Ingredient newAmount);
 
-    Ingredient findIngredientByName(IngredientName target);
+    Ingredient findIngredientByName(IngredientName ingredientName);
 
 
     void setSalesBook(ReadOnlySalesBook salesBook);
@@ -139,6 +159,11 @@ public interface Model {
     ObservableList<Ingredient> getFilteredIngredientList();
 
     /**
+     * Returns an unmodifiable view of the sales record list
+     */
+    ObservableList<SalesRecordEntry> getFilteredSalesRecordList();
+
+    /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      *
      * @throws NullPointerException if {@code predicate} is null.
@@ -151,4 +176,12 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredSalesList(Predicate<SalesRecordEntry> predicate);
+
+    /**
+     * Updates the filter of the filtered ingredient list to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredIngredientList(Predicate<Ingredient> predicate);
+
 }

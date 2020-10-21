@@ -30,7 +30,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Ingredient> filteredIngredients;
-    private final FilteredList<SalesRecordEntry> filteredSales;
+    private final FilteredList<SalesRecordEntry> filteredSalesRecordList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -52,9 +52,10 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList(),
                 Model.PREDICATE_SHOW_ALL_ACTIVE_PERSONS);
-        filteredIngredients = new FilteredList<>(this.ingredientBook.getIngredientList());
-        filteredSales = new FilteredList<>(this.salesBook.getSalesRecord(),
-                Model.PREDICATE_SHOW_ALL_SALES);
+        filteredIngredients = new FilteredList<>(this.ingredientBook.getIngredientList(),
+                Model.PREDICATE_SHOW_ALL_INGREDIENTS);
+        filteredSalesRecordList = new FilteredList<>(this.salesBook.getSalesRecord(),
+                Model.PREDICATE_SHOW_ALL_SALES_RECORD_ENTRY);
     }
 
     /**
@@ -100,6 +101,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Path getIngredientBookFilePath() {
+        return userPrefs.getIngredientBookFilePath();
+    }
+
+    @Override
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
@@ -109,6 +115,12 @@ public class ModelManager implements Model {
     public void setSalesBookFilePath(Path salesBookFilePath) {
         requireNonNull(salesBookFilePath);
         userPrefs.setSalesBookFilePath(salesBookFilePath);
+    }
+
+    @Override
+    public void setIngredientBookFilePath(Path ingredientBookFilePath) {
+        requireNonNull(ingredientBookFilePath);
+        userPrefs.setIngredientBookFilePath(ingredientBookFilePath);
     }
 
     //=========== AddressBook ================================================================================
@@ -192,7 +204,7 @@ public class ModelManager implements Model {
     @Override
     public void addSalesRecordEntry(SalesRecordEntry salesRecordEntry) {
         salesBook.addSalesRecordEntry(salesRecordEntry);
-        updateFilteredSalesList(PREDICATE_SHOW_ALL_SALES);
+        updateFilteredSalesList(PREDICATE_SHOW_ALL_SALES_RECORD_ENTRY);
     }
 
     //=========== IngredientBook ==================================================================================
@@ -211,8 +223,14 @@ public class ModelManager implements Model {
         return ingredientBook.findIngredientByName(ingredientName);
     }
 
+    @Override
+    public void addIngredient(Ingredient ingredient) {
+        ingredientBook.addIngredient(ingredient);
+        updateFilteredIngredientList(PREDICATE_SHOW_ALL_INGREDIENTS);
+    }
 
-    //=========== Filtered Person List Accessors =============================================================
+
+    //=========== Filtered List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
@@ -233,6 +251,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<SalesRecordEntry> getFilteredSalesRecordList() {
+        return filteredSalesRecordList;
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
@@ -241,7 +264,13 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredSalesList(Predicate<SalesRecordEntry> predicate) {
         requireNonNull(predicate);
-        filteredSales.setPredicate(predicate);
+        filteredSalesRecordList.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredIngredientList(Predicate<Ingredient> predicate) {
+        requireNonNull(predicate);
+        filteredIngredients.setPredicate(predicate);
     }
 
     @Override
