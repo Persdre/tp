@@ -2,13 +2,137 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.logging.Logger;
+
+import javafx.collections.ObservableList;
+import seedu.address.commons.core.LogsCenter;
 
 import javafx.collections.ObservableList;
 
-public class SalesTimeBook {
-	private Unique
+public class SalesTimeBook implements ReadOnlySalesTimeBook{
+	private UniqueSalesBookList salesBookList;
+	private final Logger logger = LogsCenter.getLogger(SalesTimeBook.class);
+
+	public SalesTimeBook() {
+		salesBookList = new UniqueSalesBookList();
+	}
+
+	/**
+	 * Creates a SalesTimeBook using the record in {@code toBeCopied}.
+	 *
+	 * @param toBeCopied the SalesBook to be copied from
+	 */
+	public SalesTimeBook(ReadOnlySalesTimeBook toBeCopied) {
+		this();
+		resetData(toBeCopied);
+	}
+
+	/**
+	 * Resets the existing data of this {@code SalesBook} with {@code newData}.
+	 */
+	public void resetData(ReadOnlySalesTimeBook newData) {
+		requireNonNull(newData);
+		setRecord(newData.getSalesBookList());
+	}
+
+	public void setRecord(List<SalesBookEntry> sales) {
+		requireNonNull(sales);
+		salesBookList.setSalesBook(sales);
+	}
+
+	/**
+	 * Sets the sales record to the sales information which is provided as a Map.
+	 * This is used only at initialisation of the sales record.
+	 *
+	 * @param sales sales information that has been parsed.
+	 */
+	public void setRecord(Map<LocalDate, SalesBook> sales) {
+		requireNonNull(sales);
+		assert !sales.isEmpty();
+		logger.fine("SalesTimeBook is being initialised with the first user input.");
+		salesBookList.setSalesBook(sales);
+		assert !sales.isEmpty();
+	}
+
+
+	/**
+	 * Adds a salesBookEntry to the salesbook list.
+	 */
+	public void addSalesBookEntry(SalesBookEntry s) {
+		salesBookList.add(s);
+	}
+
+	/**
+	 * Returns true if a salesBookEntry with the same identity as {@code salesBookEntry} exists in the record.
+	 */
+	public boolean hasSalesBookEntry(SalesBookEntry salesBookEntry) {
+		requireNonNull(salesBookEntry);
+		return salesBookList.contains(salesBookEntry);
+	}
+
+	public UniqueSalesBookList getRecord() {
+		return salesBookList;
+	}
+
+	/**
+	 * Overwrites existing sales record based on the sales information which is provided as a Map.
+	 * This is used after sales record has been initialised.
+	 *
+	 * @param sales sales information that has been parsed.
+	 */
+//	public void overwriteSales(Map<Drink, Integer> sales) {
+//		requireNonNull(sales);
+//		assert !sales.isEmpty();
+//		logger.fine("SalesBook is being overwritten with the new user input.");
+//		HashMap<Drink, Integer> newRecord = new HashMap<>();
+//		// for all the sales items in sales, overwrite them in record
+//		for (Drink key : sales.keySet()) {
+//			Optional<Integer> userInput = Optional.ofNullable(sales.get(key));
+//			Optional<Integer> changedValue = userInput.map(x -> x == 0
+//					? record.getSalesEntry(key).getNumberSold()
+//					: sales.get(key));
+//			newRecord.put(key, changedValue.get());
+//		}
+//		record.setSalesRecord(newRecord);
+//		assert !record.isEmpty();
+//	}
+
+	/**
+	 * Checks whether the sales book list is empty.
+	 *
+	 * @return true if the sales record is empty, false otherwise.
+	 */
+	public boolean isEmptySalesBookList() {
+		return salesBookList.isEmpty();
+	}
+
+	/**
+	 * Returns an unmodifiable view of the list of sales records.
+	 * This map will not contain any duplicate drink items.
+	 */
+	@Override
+	public ObservableList<SalesBookEntry> getSalesBookList() {
+		return salesBookList.asUnmodifiableObservableList();
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder display = new StringBuilder();
+
+		salesBookList.forEach(x -> display.append(x + "\n"));
+
+		return display.toString();
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		return other == this // short circuit if same object
+				|| (other instanceof SalesTimeBook // instanceof handles nulls
+				&& salesBookList.equals(((SalesTimeBook) other).salesBookList));e
+	}
 }
