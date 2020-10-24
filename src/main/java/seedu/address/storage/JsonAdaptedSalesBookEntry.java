@@ -17,14 +17,14 @@ import seedu.address.model.person.Phone;
 public class JsonAdaptedSalesBookEntry {
 	public static final String MISSING_FIELD_MESSAGE_FORMAT = "SalesBookEntry's %s field is missing!";
 
-	private final LocalDate localDate;
+	private final String localDate;
 	private final SalesBook salesBook;
 
 	/**
 	 * Constructs a {@code JsonAdaptedSalesBookEntry} with the given salesBookEntry details.
 	 */
 	@JsonCreator
-	public JsonAdaptedSalesBookEntry(@JsonProperty("localDate") LocalDate localDate,
+	public JsonAdaptedSalesBookEntry(@JsonProperty("localDate") String localDate,
 									   @JsonProperty("salesBook") SalesBook salesBook) {
 
 		this.localDate = localDate;
@@ -35,7 +35,7 @@ public class JsonAdaptedSalesBookEntry {
 	 * Converts a given {@code SalesBookEntry} into this class for Jackson use.
 	 */
 	public JsonAdaptedSalesBookEntry(SalesBookEntry source) {
-		localDate = source.getLocalDate();
+		localDate = source.getLocalDate().toString();
 		salesBook = source.getSalesBook();
 	}
 
@@ -49,7 +49,7 @@ public class JsonAdaptedSalesBookEntry {
 			throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
 		}
 
-		final LocalDate modelLocalDate = localDate;
+		final LocalDate modelLocalDate = LocalDate.parse(localDate);
 
 		if (salesBook == null) {
 			throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));

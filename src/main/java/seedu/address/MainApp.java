@@ -74,7 +74,8 @@ public class MainApp extends Application {
         SalesTimeBookStorage salesTimeBookStorage = new JsonSalesTimeBookStorage(userPrefs.getSalesTimeBookFilePath());
         IngredientBookStorage ingredientBookStorage = new JsonIngredientBookStorage(
                 userPrefs.getIngredientBookFilePath());
-        storage = new StorageManager(addressBookStorage, salesBookStorage, userPrefsStorage, ingredientBookStorage);
+        storage = new StorageManager(addressBookStorage, salesBookStorage, salesTimeBookStorage,
+                userPrefsStorage, ingredientBookStorage);
 
         initLogging(config);
 
@@ -99,7 +100,7 @@ public class MainApp extends Application {
         ReadOnlyAddressBook initialAddressBookData;
         ReadOnlyIngredientBook initialIngredientBookData;
         ReadOnlySalesBook initialSalesBookData;
-        ReadOnlySalesBook initialSalesTimeBookData;
+        ReadOnlySalesTimeBook initialSalesTimeBookData;
 
         try {
             addressBookOptional = storage.readAddressBook();
@@ -120,17 +121,18 @@ public class MainApp extends Application {
             }
 
             if (!salesTimeBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample SalesBook");
+                logger.info("Data file not found. Will be starting with a sample SalesTimeBook");
             }
 
             initialIngredientBookData = ingredientBookOptional.orElseGet(SampleDataUtil::getSampleIngredientBook);
             initialSalesBookData = salesBookOptional.orElseGet(SampleDataUtil::getSampleSalesBook);
-            initialSalesTimeBookData = salesTimeBookOptional.orElseGet(SampleDataUtil.getSampleAddressBook())
+            initialSalesTimeBookData = salesTimeBookOptional.orElseGet(SampleDataUtil::getSampleSalesTimeBook);
             initialAddressBookData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
             initialAddressBookData = new AddressBook();
             initialSalesBookData = new SalesBook();
+            initialSalesTimeBookData = new SalesTimeBook();
             initialIngredientBookData = new IngredientBook();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
@@ -142,7 +144,8 @@ public class MainApp extends Application {
 
         IngredientBook sample = new IngredientBook();
 
-        return new ModelManager(initialAddressBookData, initialSalesBookData, initialIngredientBookData, userPrefs);
+        return new ModelManager(initialAddressBookData, initialSalesBookData,
+                initialSalesTimeBookData, initialIngredientBookData, userPrefs);
     }
 
     private void initLogging(Config config) {

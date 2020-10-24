@@ -220,10 +220,10 @@ public class ModelManager implements Model {
 
     //=========== SalesTimeBook ==================================================================================
 
-//    @Override
-//    public void getSalesBookList(ReadOnlySalesTimeBook salesTimeBook) {
-//        this.salesTimeBook.resetData(salesTimeBook);
-//    }
+    @Override
+    public void setSalesTimeBook(ReadOnlySalesTimeBook salesTimeBook) {
+        this.salesTimeBook.resetData(salesTimeBook);
+    }
 
     @Override
     public SalesTimeBook getSalesTimeBook() {
@@ -244,11 +244,11 @@ public class ModelManager implements Model {
             salesTimeBook.overwriteSalesBook(userInput);
         }
     }
-//    @Override
-//    public void addSalesRecordEntry(SalesRecordEntry salesRecordEntry) {
-//        salesBook.addSalesRecordEntry(salesRecordEntry);
-//        updateFilteredSalesList(PREDICATE_SHOW_ALL_SALES_RECORD_ENTRY);
-//    }
+    @Override
+    public void addSalesBookEntry(SalesBookEntry salesBookEntry) {
+        salesTimeBook.addSalesBookEntry(salesBookEntry);
+        updateFilteredSalesBookList(PREDICATE_SHOW_ALL_SALES_BOOK_ENTRY);
+    }
     //=========== IngredientBook ==================================================================================
 
     @Override
@@ -315,6 +315,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateFilteredSalesBookList(Predicate<SalesBookEntry> predicate) {
+        requireNonNull(predicate);
+        filteredSalesBookList.setPredicate(predicate);
+    }
+
+    @Override
     public void updateFilteredIngredientList(Predicate<Ingredient> predicate) {
         requireNonNull(predicate);
         filteredIngredients.setPredicate(predicate);
@@ -336,6 +342,7 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && salesBook.equals(other.salesBook)
+                && salesTimeBook.equals(other.salesTimeBook)
                 && ingredientBook.equals(other.ingredientBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);

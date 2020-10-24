@@ -10,7 +10,9 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyIngredientBook;
 import seedu.address.model.ReadOnlySalesBook;
+import seedu.address.model.ReadOnlySalesTimeBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.SalesBook;
 import seedu.address.model.UserPrefs;
 
 /**
@@ -21,6 +23,7 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private SalesBookStorage salesBookStorage;
+    private SalesTimeBookStorage salesTimeBookStorage;
     private UserPrefsStorage userPrefsStorage;
     private IngredientBookStorage ingredientBookStorage;
 
@@ -28,11 +31,13 @@ public class StorageManager implements Storage {
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
     public StorageManager(AddressBookStorage addressBookStorage, SalesBookStorage salesBookStorage,
+                          SalesTimeBookStorage  salesTimeBookStorage,
                           UserPrefsStorage userPrefsStorage, IngredientBookStorage ingredientBookStorage) {
         super();
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
         this.salesBookStorage = salesBookStorage;
+        this.salesTimeBookStorage = salesTimeBookStorage;
         this.ingredientBookStorage = ingredientBookStorage;
     }
 
@@ -115,6 +120,37 @@ public class StorageManager implements Storage {
         assert filePath.toString().length() > 0 : "filePath should not be empty.";
         logger.fine("Attempting to write to data file: " + filePath);
         salesBookStorage.saveSalesBook(salesBook, filePath);
+    }
+
+    // ================ SalesTimeBook methods ==============================
+
+    @Override
+    public Path getSalesTimeBookFilePath() {
+        return salesTimeBookStorage.getSalesTimeBookFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlySalesTimeBook> readSalesTimeBook() throws DataConversionException, IOException {
+        return readSalesTimeBook(salesTimeBookStorage.getSalesTimeBookFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlySalesTimeBook> readSalesTimeBook(Path filePath) throws DataConversionException,
+            IOException {
+        assert filePath.toString().length() > 0 : "filePath should not be empty.";
+        logger.fine("Attempting to read data from file: " + filePath);
+        return salesTimeBookStorage.readSalesTimeBook(filePath);
+    }
+
+    @Override
+    public void saveSalesTimeBook(ReadOnlySalesTimeBook salesTimeBook) throws IOException {
+        saveSalesTimeBook(salesTimeBook, salesTimeBookStorage.getSalesTimeBookFilePath());
+    }
+
+    @Override
+    public void saveSalesTimeBook(ReadOnlySalesTimeBook salesTimeBook, Path filePath) throws IOException {
+        assert filePath.toString().length() > 0 : "filePath should not be empty.";
+        logger.fine("Attempting to write to data file: " + filePath);
     }
 
     // ================ IngredientBook methods ==============================

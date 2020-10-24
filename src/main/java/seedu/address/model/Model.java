@@ -132,6 +132,11 @@ public interface Model {
     void addSalesRecordEntry(SalesRecordEntry salesRecordEntry);
 
     /**
+     * Adds an SalesBookEntry to the SalesTimebook.
+     */
+
+    void addSalesBookEntry(SalesBookEntry salesBookEntry);
+    /**
      * Adds an ingredient to the ingredient book.
      * The ingredient must not already exist in the ingredient book.
      */
@@ -150,6 +155,8 @@ public interface Model {
 
 
     void setSalesBook(ReadOnlySalesBook salesBook);
+
+    void setSalesTimeBook(ReadOnlySalesTimeBook salesTimeBook);
 
     SalesBook getSalesBook();
 
@@ -195,6 +202,15 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredSalesList(Predicate<SalesRecordEntry> predicate);
+
+
+    /**
+     * Updates the filter of the filtered sales book list to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredSalesBookList(Predicate<SalesBookEntry> predicate);
+
 
     /**
      * Updates the filter of the filtered ingredient list to filter by the given {@code predicate}.

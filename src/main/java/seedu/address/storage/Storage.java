@@ -49,6 +49,9 @@ public interface Storage extends AddressBookStorage, IngredientBookStorage, Sale
     void saveSalesTimeBook(ReadOnlySalesTimeBook salesTimeBook) throws IOException;
 
     @Override
+    Optional<ReadOnlySalesTimeBook> readSalesTimeBook() throws DataConversionException, IOException;
+
+    @Override
     Path getIngredientBookFilePath();
 
     @Override

@@ -1,5 +1,6 @@
 package seedu.address.model.util;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -10,8 +11,11 @@ import seedu.address.model.IngredientBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyIngredientBook;
 import seedu.address.model.ReadOnlySalesBook;
+import seedu.address.model.ReadOnlySalesTimeBook;
 import seedu.address.model.SalesBook;
+import seedu.address.model.SalesBookEntry;
 import seedu.address.model.SalesRecordEntry;
+import seedu.address.model.SalesTimeBook;
 import seedu.address.model.ingredient.Amount;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientName;
@@ -72,6 +76,13 @@ public class SampleDataUtil {
         };
     }
 
+    public static SalesBookEntry[] getSampleSalesBookEntry() {
+        LocalDate localDate = LocalDate.now();
+        return new SalesBookEntry[] {
+            new SalesBookEntry(localDate, new SalesBook(getSampleSalesBook()))
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
@@ -87,6 +98,15 @@ public class SampleDataUtil {
             sampleSb.addSalesRecordEntry(sampleSalesRecordEntry);
         }
         return sampleSb;
+    }
+
+    public static ReadOnlySalesTimeBook getSampleSalesTimeBook() {
+        SalesTimeBook sampleSTB = new SalesTimeBook();
+
+        for(SalesBookEntry sampleSalesBookEntry : getSampleSalesBookEntry()) {
+            sampleSTB.addSalesBookEntry(sampleSalesBookEntry);
+        }
+        return sampleSTB;
     }
 
     public static Ingredient[] getSampleIngredients() {
