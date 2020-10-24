@@ -19,7 +19,7 @@ import seedu.address.model.SalesRecordEntry;
 @JsonRootName(value = "salesbook")
 class JsonSerializableSalesBook {
 
-    public static final String MESSAGE_DUPLICATE_SALESRECORDENTRY = "Persons list contains duplicate "
+    public static final String MESSAGE_DUPLICATE_SALESRECORDENTRY = "Sales book contains duplicate "
             + "salesRecordEntry(s).";
     private final List<JsonAdaptedSalesRecordEntry> salesRecordEntries = new ArrayList<>();
 

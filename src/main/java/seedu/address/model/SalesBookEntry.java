@@ -24,7 +24,7 @@ public class SalesBookEntry {
 		return localDate;
 	}
 
-	public SalesBook salesBook() {
+	public SalesBook getSalesBook() {
 		return salesBook;
 	}
 

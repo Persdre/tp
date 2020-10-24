@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.Map;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -43,11 +44,13 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook
                 + " sales book: " + salesBook
+                + " sales time book: " + salesTimeBook
                 + " Ingredients book: " + ingredientBook
                 + " and user prefs" + " " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.salesBook = new SalesBook(salesBook);
+        this.salesTimeBook = new SalesTimeBook(salesTimeBook);
         this.ingredientBook = new IngredientBook(ingredientBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList(),
@@ -62,7 +65,7 @@ public class ModelManager implements Model {
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
     public ModelManager() {
-        this(new AddressBook(), new SalesBook(),
+        this(new AddressBook(), new SalesBook(), new SalesTimeBook(),
                 new IngredientBook(), new UserPrefs());
     }
 
@@ -207,6 +210,29 @@ public class ModelManager implements Model {
         updateFilteredSalesList(PREDICATE_SHOW_ALL_SALES_RECORD_ENTRY);
     }
 
+    //=========== SalesTimeBook ==================================================================================
+
+    @Override
+    public void getSalesBookList(ReadOnlySalesTimeBook salesTimeBook) {
+        this.salesTimeBook.resetData(salesTimeBook);
+    }
+
+    @Override
+    public SalesTimeBook getSalesBookList() {
+        return salesTimeBook;
+    }
+
+    @Override
+    public boolean isEmptySalesTimeBook() {
+        return salesTimeBook.isEmptySalesBookList();
+    }
+
+
+    @Override
+    public void addSalesRecordEntry(SalesRecordEntry salesRecordEntry) {
+        salesBook.addSalesRecordEntry(salesRecordEntry);
+        updateFilteredSalesList(PREDICATE_SHOW_ALL_SALES_RECORD_ENTRY);
+    }
     //=========== IngredientBook ==================================================================================
 
     @Override

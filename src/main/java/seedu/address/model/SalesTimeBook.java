@@ -133,6 +133,6 @@ public class SalesTimeBook implements ReadOnlySalesTimeBook{
 	public boolean equals(Object other) {
 		return other == this // short circuit if same object
 				|| (other instanceof SalesTimeBook // instanceof handles nulls
-				&& salesBookList.equals(((SalesTimeBook) other).salesBookList));e
+				&& salesBookList.equals(((SalesTimeBook) other).salesBookList));
 	}
 }
