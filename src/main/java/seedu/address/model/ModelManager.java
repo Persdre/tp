@@ -32,6 +32,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Ingredient> filteredIngredients;
     private final FilteredList<SalesRecordEntry> filteredSalesRecordList;
+    private final FilteredList<SalesBookEntry> filteredSalesBookList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -59,6 +60,8 @@ public class ModelManager implements Model {
                 Model.PREDICATE_SHOW_ALL_INGREDIENTS);
         filteredSalesRecordList = new FilteredList<>(this.salesBook.getSalesRecord(),
                 Model.PREDICATE_SHOW_ALL_SALES_RECORD_ENTRY);
+        filteredSalesBookList = new FilteredList<>(this.salesTimeBook.getSalesBookList(),
+                Model.PREDICATE_SHOW_ALL_SALES_BOOK_ENTRY);
     }
 
     /**
@@ -101,6 +104,11 @@ public class ModelManager implements Model {
     @Override
     public Path getSalesBookFilePath() {
         return userPrefs.getSalesBookFilePath();
+    }
+
+    @Override
+    public Path getSalesTimeBookFilePath() {
+        return userPrefs.getSalesTimeBookFilePath();
     }
 
     @Override
@@ -212,13 +220,13 @@ public class ModelManager implements Model {
 
     //=========== SalesTimeBook ==================================================================================
 
-    @Override
-    public void getSalesBookList(ReadOnlySalesTimeBook salesTimeBook) {
-        this.salesTimeBook.resetData(salesTimeBook);
-    }
+//    @Override
+//    public void getSalesBookList(ReadOnlySalesTimeBook salesTimeBook) {
+//        this.salesTimeBook.resetData(salesTimeBook);
+//    }
 
     @Override
-    public SalesTimeBook getSalesBookList() {
+    public SalesTimeBook getSalesTimeBook() {
         return salesTimeBook;
     }
 
@@ -228,11 +236,11 @@ public class ModelManager implements Model {
     }
 
 
-    @Override
-    public void addSalesRecordEntry(SalesRecordEntry salesRecordEntry) {
-        salesBook.addSalesRecordEntry(salesRecordEntry);
-        updateFilteredSalesList(PREDICATE_SHOW_ALL_SALES_RECORD_ENTRY);
-    }
+//    @Override
+//    public void addSalesRecordEntry(SalesRecordEntry salesRecordEntry) {
+//        salesBook.addSalesRecordEntry(salesRecordEntry);
+//        updateFilteredSalesList(PREDICATE_SHOW_ALL_SALES_RECORD_ENTRY);
+//    }
     //=========== IngredientBook ==================================================================================
 
     @Override
@@ -279,6 +287,11 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<SalesRecordEntry> getFilteredSalesRecordList() {
         return filteredSalesRecordList;
+    }
+
+    @Override
+    public ObservableList<SalesBookEntry> getFilteredSalesBookList() {
+        return filteredSalesBookList;
     }
 
     @Override

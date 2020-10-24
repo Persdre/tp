@@ -27,6 +27,8 @@ public interface Model {
 
     Predicate<SalesRecordEntry> PREDICATE_SHOW_ALL_SALES_RECORD_ENTRY = unused -> true;
 
+    Predicate<SalesBookEntry> PREDICATE_SHOW_ALL_SALES_BOOK_ENTRY = unused -> true;
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -56,6 +58,12 @@ public interface Model {
      * Returns the user prefs' sales book file path.
      */
     Path getSalesBookFilePath();
+
+    /**
+     * Returns the user prefs' sales time book file path.
+     */
+    Path getSalesTimeBookFilePath();
+
 
     /**
      * Returns the user prefs' ingredient book file path.
@@ -96,6 +104,7 @@ public interface Model {
      * Returns the IngredientBook
      */
     ReadOnlyIngredientBook getIngredientBook();
+
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -147,6 +156,8 @@ public interface Model {
 
     boolean isEmptySalesBook();
 
+    boolean isEmptySalesTimeBook();
+
     void overwrite(Map<Drink, Integer> salesInput);
 
     /** Returns an unmodifiable view of the filtered person list */
@@ -162,6 +173,11 @@ public interface Model {
      * Returns an unmodifiable view of the sales record list
      */
     ObservableList<SalesRecordEntry> getFilteredSalesRecordList();
+
+    /**
+     * Returns an unmodifiable view of the sales book list
+     */
+    ObservableList<SalesBookEntry> getFilteredSalesBookList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
