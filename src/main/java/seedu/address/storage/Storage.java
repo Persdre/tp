@@ -8,13 +8,14 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyIngredientBook;
 import seedu.address.model.ReadOnlySalesBook;
+import seedu.address.model.ReadOnlySalesTimeBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, IngredientBookStorage, SalesBookStorage, UserPrefsStorage {
+public interface Storage extends AddressBookStorage, IngredientBookStorage, SalesBookStorage, SalesTimeBookStorage, UserPrefsStorage {
 
 
     @Override
@@ -36,10 +37,16 @@ public interface Storage extends AddressBookStorage, IngredientBookStorage, Sale
     Path getSalesBookFilePath();
 
     @Override
+    Path getSalesTimeBookFilePath();
+
+    @Override
     Optional<ReadOnlySalesBook> readSalesBook() throws DataConversionException, IOException;
 
     @Override
     void saveSalesBook(ReadOnlySalesBook salesBook) throws IOException;
+
+    @Override
+    void saveSalesTimeBook(ReadOnlySalesTimeBook salesTimeBook) throws IOException;
 
     @Override
     Path getIngredientBookFilePath();

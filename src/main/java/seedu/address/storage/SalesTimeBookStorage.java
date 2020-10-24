@@ -31,7 +31,7 @@ public interface SalesTimeBookStorage {
 	 * @param salesTimeBook cannot be null.
 	 * @throws IOException if there was any problem writing to the file.
 	 */
-	void saveSalesTImeBook(ReadOnlySalesTimeBook salesTimeBook) throws IOException;
+	void saveSalesTimeBook(ReadOnlySalesTimeBook salesTimeBook) throws IOException;
 
 	/**
 	 * @see #saveSalesTimeBook(ReadOnlySalesTimeBook)

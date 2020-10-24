@@ -36,6 +36,7 @@ import seedu.address.storage.JsonSalesBookStorage;
 import seedu.address.storage.JsonSalesTimeBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.SalesBookStorage;
+import seedu.address.storage.SalesTimeBookStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
@@ -70,7 +71,7 @@ public class MainApp extends Application {
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         SalesBookStorage salesBookStorage = new JsonSalesBookStorage(
                 userPrefs.getSalesBookFilePath());
-        SalesTimeBookStorage salesTimeBookStorage = new JsonSales
+        SalesTimeBookStorage salesTimeBookStorage = new JsonSalesTimeBookStorage(userPrefs.getSalesTimeBookFilePath());
         IngredientBookStorage ingredientBookStorage = new JsonIngredientBookStorage(
                 userPrefs.getIngredientBookFilePath());
         storage = new StorageManager(addressBookStorage, salesBookStorage, userPrefsStorage, ingredientBookStorage);
@@ -104,6 +105,7 @@ public class MainApp extends Application {
             addressBookOptional = storage.readAddressBook();
             ingredientBookOptional = storage.readIngredientBook();
             salesBookOptional = storage.readSalesBook();
+            salesTimeBookOptional = storage.readSalesTimeBook();
 
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
@@ -117,8 +119,13 @@ public class MainApp extends Application {
                 logger.info("Data file not found. Will be starting with a sample SalesBook");
             }
 
+            if (!salesTimeBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample SalesBook");
+            }
+
             initialIngredientBookData = ingredientBookOptional.orElseGet(SampleDataUtil::getSampleIngredientBook);
             initialSalesBookData = salesBookOptional.orElseGet(SampleDataUtil::getSampleSalesBook);
+            initialSalesTimeBookData = salesTimeBookOptional.orElseGet(SampleDataUtil.getSampleAddressBook())
             initialAddressBookData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");

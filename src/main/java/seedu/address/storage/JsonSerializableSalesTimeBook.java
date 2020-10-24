@@ -12,7 +12,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlySalesBook;
 import seedu.address.model.ReadOnlySalesTimeBook;
 import seedu.address.model.SalesBook;
+import seedu.address.model.SalesBookEntry;
 import seedu.address.model.SalesRecordEntry;
+import seedu.address.model.SalesTimeBook;
 
 /**
  * An Immutable SalesTimeBook that is serializable to JSON format.
@@ -40,5 +42,22 @@ class JsonSerializableSalesTimeBook {
 	public JsonSerializableSalesTimeBook(ReadOnlySalesTimeBook source) {
 		salesBookEntries.addAll(source.getSalesBookList().stream().map(JsonAdaptedSalesBookEntry::new)
 				.collect(Collectors.toList()));
+	}
+
+	/**
+	 * Converts this sales time book into the model's {@code SalesTimeBook} object.
+	 *
+	 * @throws IllegalValueException if there were any data constraints violated.
+	 */
+	public SalesTimeBook toModelType() throws IllegalValueException {
+		SalesTimeBook salesTimeBook = new SalesTimeBook();
+		for (JsonAdaptedSalesBookEntry jsonAdaptedSalesBookEntry : salesBookEntries) {
+			SalesBookEntry salesBookEntry = jsonAdaptedSalesBookEntry.toModelType();
+			if (salesTimeBook.hasSalesBookEntry(salesBookEntry)) {
+				throw new IllegalValueException(MESSAGE_DUPLICATE_SALESRECORDENTRY);
+			}
+			salesTimeBook.addSalesBookEntry(salesBookEntry);
+		}
+		return salesTimeBook;
 	}
 }

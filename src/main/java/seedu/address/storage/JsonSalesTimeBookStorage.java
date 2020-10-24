@@ -12,10 +12,9 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.ReadOnlySalesBook;
 import seedu.address.model.ReadOnlySalesTimeBook;
 
-public class JsonSalesTimeBookStorage {
+public class JsonSalesTimeBookStorage implements SalesTimeBookStorage {
 	private static final Logger logger = LogsCenter.getLogger(JsonSalesTimeBookStorage.class);
 
 	private Path filePath;
@@ -42,7 +41,7 @@ public class JsonSalesTimeBookStorage {
 	public Optional<ReadOnlySalesTimeBook> readSalesTimeBook(Path filePath) throws DataConversionException {
 		requireNonNull(filePath);
 
-		Optional<JsonSerializableSalesTimeBook> jsonSalesBook = JsonUtil.readJsonFile(
+		Optional<JsonSerializableSalesTimeBook> jsonSalesTimeBook = JsonUtil.readJsonFile(
 				filePath, JsonSerializableSalesTimeBook.class);
 		if (!jsonSalesTimeBook.isPresent()) {
 			return Optional.empty();
