@@ -236,6 +236,14 @@ public class ModelManager implements Model {
     }
 
 
+    @Override
+    public void overwriteSalesBook(Map<LocalDate, SalesBook> userInput) {
+        if (isEmptySalesTimeBook()) {
+            salesTimeBook.setRecord(userInput);
+        } else {
+            salesTimeBook.overwriteSalesBook(userInput);
+        }
+    }
 //    @Override
 //    public void addSalesRecordEntry(SalesRecordEntry salesRecordEntry) {
 //        salesBook.addSalesRecordEntry(salesRecordEntry);

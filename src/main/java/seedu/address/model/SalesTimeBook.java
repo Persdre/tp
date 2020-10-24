@@ -85,22 +85,22 @@ public class SalesTimeBook implements ReadOnlySalesTimeBook{
 	 *
 	 * @param sales sales information that has been parsed.
 	 */
-//	public void overwriteSales(Map<Drink, Integer> sales) {
-//		requireNonNull(sales);
-//		assert !sales.isEmpty();
-//		logger.fine("SalesBook is being overwritten with the new user input.");
-//		HashMap<Drink, Integer> newRecord = new HashMap<>();
-//		// for all the sales items in sales, overwrite them in record
-//		for (Drink key : sales.keySet()) {
-//			Optional<Integer> userInput = Optional.ofNullable(sales.get(key));
-//			Optional<Integer> changedValue = userInput.map(x -> x == 0
-//					? record.getSalesEntry(key).getNumberSold()
-//					: sales.get(key));
-//			newRecord.put(key, changedValue.get());
-//		}
-//		record.setSalesRecord(newRecord);
-//		assert !record.isEmpty();
-//	}
+	public void overwriteSalesBook(Map<LocalDate, SalesBook> sales) {
+		requireNonNull(sales);
+		assert !sales.isEmpty();
+		logger.fine("SalesBook is being overwritten with the new user input.");
+		HashMap<LocalDate, SalesBook> newRecord = new HashMap<>();
+		// for all the sales items in sales, overwrite them in record
+		for (LocalDate key : sales.keySet()) {
+			Optional<SalesBook> userInput = Optional.ofNullable(sales.get(key));
+			Optional<SalesBook> changedValue = userInput.map(x -> x == null
+					? salesBookList.getSalesBook(key).getSalesBook()
+					: sales.get(key));
+			newRecord.put(key, changedValue.get());
+		}
+		salesBookList.setSalesBook(newRecord);
+		assert !salesBookList.isEmpty();
+	}
 
 	/**
 	 * Checks whether the sales book list is empty.

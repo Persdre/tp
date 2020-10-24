@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.Map;
 import java.util.function.Predicate;
 
@@ -159,6 +160,8 @@ public interface Model {
     boolean isEmptySalesTimeBook();
 
     void overwrite(Map<Drink, Integer> salesInput);
+
+    void overwriteSalesBook(Map<LocalDate, SalesBook> salesInput);
 
     /** Returns an unmodifiable view of the filtered person list */
 

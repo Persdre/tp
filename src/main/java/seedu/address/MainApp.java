@@ -22,8 +22,10 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyIngredientBook;
 import seedu.address.model.ReadOnlySalesBook;
+import seedu.address.model.ReadOnlySalesTimeBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.SalesBook;
+import seedu.address.model.SalesTimeBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
@@ -31,6 +33,7 @@ import seedu.address.storage.IngredientBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonIngredientBookStorage;
 import seedu.address.storage.JsonSalesBookStorage;
+import seedu.address.storage.JsonSalesTimeBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.SalesBookStorage;
 import seedu.address.storage.Storage;
@@ -67,6 +70,7 @@ public class MainApp extends Application {
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         SalesBookStorage salesBookStorage = new JsonSalesBookStorage(
                 userPrefs.getSalesBookFilePath());
+        SalesTimeBookStorage salesTimeBookStorage = new JsonSales
         IngredientBookStorage ingredientBookStorage = new JsonIngredientBookStorage(
                 userPrefs.getIngredientBookFilePath());
         storage = new StorageManager(addressBookStorage, salesBookStorage, userPrefsStorage, ingredientBookStorage);
@@ -89,10 +93,12 @@ public class MainApp extends Application {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         Optional<ReadOnlyIngredientBook> ingredientBookOptional;
         Optional<ReadOnlySalesBook> salesBookOptional;
+        Optional<ReadOnlySalesTimeBook> salesTimeBookOptional;
 
         ReadOnlyAddressBook initialAddressBookData;
         ReadOnlyIngredientBook initialIngredientBookData;
         ReadOnlySalesBook initialSalesBookData;
+        ReadOnlySalesBook initialSalesTimeBookData;
 
         try {
             addressBookOptional = storage.readAddressBook();
@@ -123,6 +129,7 @@ public class MainApp extends Application {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
             initialAddressBookData = new AddressBook();
             initialSalesBookData = new SalesBook();
+            initialSalesTimeBookData = new SalesTimeBook();
             initialIngredientBookData = new IngredientBook();
         }
 
