@@ -37,6 +37,7 @@ public interface SalesTimeBookStorage {
 
 	/**
 	 * @see #saveSalesTimeBook(ReadOnlySalesTimeBook)
+	 *
 	 */
 	void saveSalesTimeBook(ReadOnlySalesTimeBook salesTimeBook, Path filePath) throws IOException;
 

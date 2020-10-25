@@ -224,7 +224,8 @@ public class ModelManager implements Model {
         updateFilteredSalesList(PREDICATE_SHOW_ALL_SALES_RECORD_ENTRY);
     }
 
-    //=========== SalesTimeBook ==================================================================================
+
+    // =========== SalesTimeBook ==================================================================================
 
     @Override
     public void setSalesTimeBook(ReadOnlySalesTimeBook salesTimeBook) {
