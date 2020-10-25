@@ -14,8 +14,10 @@ import seedu.address.commons.core.LogsCenter;
 
 import javafx.collections.ObservableList;
 
-public class SalesTimeBook implements ReadOnlySalesTimeBook{
+public class SalesTimeBook implements ReadOnlySalesTimeBook {
+
 	private UniqueSalesBookList salesBookList;
+
 	private final Logger logger = LogsCenter.getLogger(SalesTimeBook.class);
 
 	public SalesTimeBook() {
@@ -51,7 +53,7 @@ public class SalesTimeBook implements ReadOnlySalesTimeBook{
 	 *
 	 * @param sales sales information that has been parsed.
 	 */
-	public void setRecord(Map<LocalDate, SalesBook> sales) {
+	public void setRecord(Map<LocalDate, UniqueSalesRecordList> sales) {
 		requireNonNull(sales);
 		assert !sales.isEmpty();
 		logger.fine("SalesTimeBook is being initialised with the first user input.");
@@ -85,16 +87,16 @@ public class SalesTimeBook implements ReadOnlySalesTimeBook{
 	 *
 	 * @param sales sales information that has been parsed.
 	 */
-	public void overwriteSalesBook(Map<LocalDate, SalesBook> sales) {
+	public void overwriteSalesBook(Map<LocalDate, UniqueSalesRecordList> sales) {
 		requireNonNull(sales);
 		assert !sales.isEmpty();
-		logger.fine("SalesBook is being overwritten with the new user input.");
-		HashMap<LocalDate, SalesBook> newRecord = new HashMap<>();
+		logger.fine("SalesTimeBook is being overwritten with the new user input.");
+		HashMap<LocalDate, UniqueSalesRecordList> newRecord = new HashMap<>();
 		// for all the sales items in sales, overwrite them in record
 		for (LocalDate key : sales.keySet()) {
-			Optional<SalesBook> userInput = Optional.ofNullable(sales.get(key));
-			Optional<SalesBook> changedValue = userInput.map(x -> x == null
-					? salesBookList.getSalesBook(key).getSalesBook()
+			Optional<UniqueSalesRecordList> userInput = Optional.ofNullable(sales.get(key));
+			Optional<UniqueSalesRecordList> changedValue = userInput.map(x -> x == null
+					? salesBookList.getSalesBook(key).getSalesRecordList()
 					: sales.get(key));
 			newRecord.put(key, changedValue.get());
 		}
@@ -112,8 +114,8 @@ public class SalesTimeBook implements ReadOnlySalesTimeBook{
 	}
 
 	/**
-	 * Returns an unmodifiable view of the list of sales records.
-	 * This map will not contain any duplicate drink items.
+	 * Returns an unmodifiable view of the list of salesbook with local date
+	 * This map will not contain any duplicate salesbook items.
 	 */
 	@Override
 	public ObservableList<SalesBookEntry> getSalesBookList() {

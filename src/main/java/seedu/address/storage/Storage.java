@@ -15,7 +15,8 @@ import seedu.address.model.UserPrefs;
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, IngredientBookStorage, SalesBookStorage, SalesTimeBookStorage, UserPrefsStorage {
+public interface Storage extends AddressBookStorage, IngredientBookStorage, SalesBookStorage,
+        SalesTimeBookStorage, UserPrefsStorage {
 
 
     @Override

@@ -16,6 +16,7 @@ import seedu.address.model.SalesBook;
 import seedu.address.model.SalesBookEntry;
 import seedu.address.model.SalesRecordEntry;
 import seedu.address.model.SalesTimeBook;
+import seedu.address.model.UniqueSalesRecordList;
 import seedu.address.model.ingredient.Amount;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientName;
@@ -79,7 +80,7 @@ public class SampleDataUtil {
     public static SalesBookEntry[] getSampleSalesBookEntry() {
         LocalDate localDate = LocalDate.now();
         return new SalesBookEntry[] {
-            new SalesBookEntry(localDate, new SalesBook(getSampleSalesBook()))
+            new SalesBookEntry(localDate, new UniqueSalesRecordList())
         };
     }
 

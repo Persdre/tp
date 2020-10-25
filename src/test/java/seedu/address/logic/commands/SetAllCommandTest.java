@@ -13,6 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 //import seedu.address.model.ReadOnlyIngredientBook;
 import seedu.address.model.SalesBook;
+import seedu.address.model.SalesTimeBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.ingredient.Amount;
 
@@ -31,7 +32,12 @@ class SetAllCommandTest {
     private static final IngredientBook stubBook = new IngredientBook();
     private static final IngredientBook filledBook = new IngredientBook();
 
+<<<<<<< Updated upstream
     private final Model model = new ModelManager(getTypicalAddressBook(), new SalesBook(),
+=======
+    private Model model = new ModelManager(getTypicalAddressBook(), new SalesBook(),
+            new SalesTimeBook(),
+>>>>>>> Stashed changes
             new IngredientBook(), new UserPrefs());
 
     /*@Test
@@ -66,6 +72,7 @@ class SetAllCommandTest {
 
         Model expectedModel =
                 new ModelManager(new AddressBook(model.getAddressBook()), model.getSalesBook(),
+                        model.getSalesTimeBook(),
                         model.getIngredientBook(), new UserPrefs());
 
         expectedModel.setIngredientBook(readOnlyToSet);

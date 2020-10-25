@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -8,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.SalesBook;
 import seedu.address.model.SalesBookEntry;
+import seedu.address.model.UniqueSalesRecordList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 
@@ -18,25 +20,26 @@ public class JsonAdaptedSalesBookEntry {
 	public static final String MISSING_FIELD_MESSAGE_FORMAT = "SalesBookEntry's %s field is missing!";
 
 	private final String localDate;
-	private final SalesBook salesBook;
+	private final UniqueSalesRecordList salesList;
 
 	/**
 	 * Constructs a {@code JsonAdaptedSalesBookEntry} with the given salesBookEntry details.
 	 */
 	@JsonCreator
 	public JsonAdaptedSalesBookEntry(@JsonProperty("localDate") String localDate,
-									   @JsonProperty("salesBook") SalesBook salesBook) {
+									   @JsonProperty("salesRecordList") UniqueSalesRecordList salesList) {
 
 		this.localDate = localDate;
-		this.salesBook = salesBook;
+		this.salesList = salesList;
 	}
 
 	/**
 	 * Converts a given {@code SalesBookEntry} into this class for Jackson use.
 	 */
 	public JsonAdaptedSalesBookEntry(SalesBookEntry source) {
-		localDate = source.getLocalDate().toString();
-		salesBook = source.getSalesBook();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		localDate = source.getLocalDate().format(formatter);
+		salesList = source.getSalesRecordList();
 	}
 
 	/**
@@ -51,11 +54,11 @@ public class JsonAdaptedSalesBookEntry {
 
 		final LocalDate modelLocalDate = LocalDate.parse(localDate);
 
-		if (salesBook == null) {
+		if (salesList == null) {
 			throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
 		}
 
-		final SalesBook modelSalesBook = salesBook;
+		final UniqueSalesRecordList modelSalesBook = salesList;
 
 		return new SalesBookEntry(modelLocalDate, modelSalesBook);
 

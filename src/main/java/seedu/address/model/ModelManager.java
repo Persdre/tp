@@ -129,6 +129,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setSalesTimeBookFilePath(Path salesTimeBookFilePath) {
+        requireAllNonNull(salesTimeBookFilePath);
+        userPrefs.setSalesTimeBookFilePath(salesTimeBookFilePath);
+    }
+
+    @Override
     public void setIngredientBookFilePath(Path ingredientBookFilePath) {
         requireNonNull(ingredientBookFilePath);
         userPrefs.setIngredientBookFilePath(ingredientBookFilePath);
@@ -237,7 +243,7 @@ public class ModelManager implements Model {
 
 
     @Override
-    public void overwriteSalesBook(Map<LocalDate, SalesBook> userInput) {
+    public void overwriteSalesBook(Map<LocalDate, UniqueSalesRecordList> userInput) {
         if (isEmptySalesTimeBook()) {
             salesTimeBook.setRecord(userInput);
         } else {

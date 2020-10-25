@@ -82,6 +82,11 @@ public interface Model {
     void setSalesBookFilePath(Path salesBookFilePath);
 
     /**
+     * Sets the user prefs' sales time book file path.
+     */
+    void setSalesTimeBookFilePath(Path salesTimeBookFilePath);
+
+    /**
      * Sets the user prefs' ingredient book file path.
      */
     void setIngredientBookFilePath(Path ingredientBookFilePath);
@@ -168,7 +173,7 @@ public interface Model {
 
     void overwrite(Map<Drink, Integer> salesInput);
 
-    void overwriteSalesBook(Map<LocalDate, SalesBook> salesInput);
+    void overwriteSalesBook(Map<LocalDate, UniqueSalesRecordList> salesInput);
 
     /** Returns an unmodifiable view of the filtered person list */
 

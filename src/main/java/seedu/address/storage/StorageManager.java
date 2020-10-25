@@ -12,7 +12,6 @@ import seedu.address.model.ReadOnlyIngredientBook;
 import seedu.address.model.ReadOnlySalesBook;
 import seedu.address.model.ReadOnlySalesTimeBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.SalesBook;
 import seedu.address.model.UserPrefs;
 
 /**
@@ -31,7 +30,7 @@ public class StorageManager implements Storage {
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
     public StorageManager(AddressBookStorage addressBookStorage, SalesBookStorage salesBookStorage,
-                          SalesTimeBookStorage  salesTimeBookStorage,
+                          SalesTimeBookStorage salesTimeBookStorage,
                           UserPrefsStorage userPrefsStorage, IngredientBookStorage ingredientBookStorage) {
         super();
         this.addressBookStorage = addressBookStorage;

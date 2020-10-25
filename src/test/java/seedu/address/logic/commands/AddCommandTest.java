@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
@@ -23,12 +24,17 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyIngredientBook;
 import seedu.address.model.ReadOnlySalesBook;
+import seedu.address.model.ReadOnlySalesTimeBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.SalesBook;
+import seedu.address.model.SalesBookEntry;
 import seedu.address.model.SalesRecordEntry;
+import seedu.address.model.SalesTimeBook;
+import seedu.address.model.UniqueSalesRecordList;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.Assert;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -86,6 +92,7 @@ public class AddCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -132,9 +139,21 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setSalesBookFilePath(Path ingredientBookFilePath) {
+        public Path getSalesTimeBookFilePath() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void setSalesBookFilePath(Path salesBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSalesTimeBookFilePath(Path salesTimeBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+
         @Override
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
@@ -142,6 +161,12 @@ public class AddCommandTest {
 
         @Override
         public void addSalesRecordEntry(SalesRecordEntry salesRecordEntry) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+
+        @Override
+        public void addSalesBookEntry(SalesBookEntry salesBookEntry) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -199,8 +224,17 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        public void setSalesTimeBook(ReadOnlySalesTimeBook salesTimeBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public SalesBook getSalesBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public SalesTimeBook getSalesTimeBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -210,7 +244,18 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean isEmptySalesTimeBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void overwrite(Map<Drink, Integer> salesInput) {
+            throw new AssertionError("This method should not be called.");
+
+        }
+
+        @Override
+        public void overwriteSalesBook(Map<LocalDate, UniqueSalesRecordList> salesInput) {
             throw new AssertionError("This method should not be called.");
 
         }
@@ -231,12 +276,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<SalesBookEntry> getFilteredSalesBookList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredSalesList(Predicate<SalesRecordEntry> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredSalesBookList(Predicate<SalesBookEntry> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 

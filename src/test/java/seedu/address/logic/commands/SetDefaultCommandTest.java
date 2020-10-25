@@ -11,6 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyIngredientBook;
 import seedu.address.model.SalesBook;
+import seedu.address.model.SalesTimeBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.ingredient.Amount;
 import seedu.address.model.ingredient.Ingredient;
@@ -65,7 +66,7 @@ class SetDefaultCommandTest {
         filledBook.addIngredient(new Ingredient(new IngredientName("Green Tea")));
         filledBook.addIngredient(new Ingredient(new IngredientName("Brown Sugar")));
 
-        Model model = new ModelManager(getTypicalAddressBook(), new SalesBook(),
+        Model model = new ModelManager(getTypicalAddressBook(), new SalesBook(), new SalesTimeBook(),
                 filledBook, new UserPrefs());
 
 
@@ -74,7 +75,7 @@ class SetDefaultCommandTest {
         model.setIngredient(new Ingredient(new IngredientName("Pearl")),
                 new Ingredient(new IngredientName("Pearl"), new Amount("120")));
 
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new SalesBook(),
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new SalesBook(), new SalesTimeBook(),
                 stubBook2, new UserPrefs());
 
         stubBook2.addIngredient(new Ingredient(new IngredientName("Milk")));

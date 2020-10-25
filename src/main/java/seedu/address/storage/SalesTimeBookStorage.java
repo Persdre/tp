@@ -8,6 +8,7 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlySalesTimeBook;
 
 public interface SalesTimeBookStorage {
+
 	/**
 	 * Returns the file path of the data file.
 	 */
@@ -33,8 +34,10 @@ public interface SalesTimeBookStorage {
 	 */
 	void saveSalesTimeBook(ReadOnlySalesTimeBook salesTimeBook) throws IOException;
 
+
 	/**
 	 * @see #saveSalesTimeBook(ReadOnlySalesTimeBook)
 	 */
 	void saveSalesTimeBook(ReadOnlySalesTimeBook salesTimeBook, Path filePath) throws IOException;
+
 }

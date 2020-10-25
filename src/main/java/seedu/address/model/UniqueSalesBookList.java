@@ -17,17 +17,16 @@ import seedu.address.model.sales.exception.SalesBookNotFoundException;
 /**
  * A list of sales book records that enforces uniqueness between its elements and does not allow nulls.
  * A sales record is considered unique by comparing using {@code SalesBookEntry#isSameSalesBook(SalesBookEntry)}. As
- * such, adding and updating of a sales book entry uses {@code SalesRecordEntry#isSameRecord(SalesEntryRecord)} for
+ * such, adding and updating of a sales book entry uses {@code SalesBookEntry#isSameSalesBook(SalesBookEntry)} for
  * equality so as to ensure that the sales book entry being added or updated is unique in terms of identity in the
- * UniqueSalesBookList. However, the removal of a sales book entry uses SalesBookEntry#equals(Object) so
- * as to ensure that the sales book entry with exactly the same local date will be removed.
+ * UniqueSalesBookList.
  *
  * Supports a minimal set of list operations.
  */
-public class UniqueSalesBookList implements Iterable<SalesBookEntry>{
+public class UniqueSalesBookList implements Iterable<SalesBookEntry> {
 	private final ObservableList<SalesBookEntry> internalList = FXCollections.observableArrayList();
 	private final ObservableList<SalesBookEntry> internalUnmodifiableList =
-			FXCollections.unmodifiableObservableList(internalList);
+	FXCollections.unmodifiableObservableList(internalList);
 
 	/**
 	 * Returns true if the list contains an equivalent record entry of {@Code SalesBookEntry toCheck}.
@@ -37,7 +36,7 @@ public class UniqueSalesBookList implements Iterable<SalesBookEntry>{
 	 */
 	public boolean contains(SalesBookEntry toCheck) {
 		requireNonNull(toCheck);
-		return internalList.stream().anyMatch(toCheck::isSameSalesBook);
+		return internalList.stream().anyMatch(toCheck::isSameSalesRecordList);
 	}
 
 	/**
@@ -153,7 +152,7 @@ public class UniqueSalesBookList implements Iterable<SalesBookEntry>{
 	 *
 	 * @param sales a Map containing sales information of drinks sold
 	 */
-	public void setSalesBook(Map<LocalDate, SalesBook> sales) {
+	public void setSalesBook(Map<LocalDate, UniqueSalesRecordList> sales) {
 		requireNonNull(sales);
 		ArrayList<SalesBookEntry> newRecord = new ArrayList<>();
 		sales.forEach((k, v) -> newRecord.add(new SalesBookEntry(k, v)));
@@ -166,7 +165,7 @@ public class UniqueSalesBookList implements Iterable<SalesBookEntry>{
 	private boolean salesBookEntriesAreUnique(List<SalesBookEntry> sales) {
 		for (int i = 0; i < sales.size() - 1; i++) {
 			for (int j = i + 1; j < sales.size(); j++) {
-				if (sales.get(i).isSameSalesBook(sales.get(j))) {
+				if (sales.get(i).isSameSalesRecordList(sales.get(j))) {
 					return false;
 				}
 			}

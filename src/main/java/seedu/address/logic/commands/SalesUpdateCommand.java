@@ -12,6 +12,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Drink;
 import seedu.address.model.Model;
 import seedu.address.model.SalesBook;
+import seedu.address.model.UniqueSalesRecordList;
 
 
 /**
@@ -48,10 +49,10 @@ public class SalesUpdateCommand extends Command {
         requireNonNull(model);
         model.overwrite(sales);
         LocalDate time = LocalDate.now();
-        SalesBook temp = model.getSalesBook();
-        HashMap<LocalDate, SalesBook> userInput = new HashMap<>();
-        userInput.put(time, temp);
-        model.overwriteSalesBook(userInput);
+        UniqueSalesRecordList temp = model.getSalesBook().getRecord();
+//        HashMap<LocalDate, UniqueSalesRecordList> userInput = new HashMap<>();
+//        userInput.put(time, temp);
+//        model.overwriteSalesBook(userInput);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

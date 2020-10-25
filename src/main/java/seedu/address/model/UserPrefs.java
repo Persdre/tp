@@ -101,6 +101,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return guiSettings.equals(o.guiSettings)
                 && addressBookFilePath.equals(o.addressBookFilePath)
                 && salesBookFilePath.equals(o.salesBookFilePath)
+                && salesTimeBookFilePath.equals(salesTimeBookFilePath)
                 && ingredientBookFilePath.equals(o.ingredientBookFilePath);
     }
 
@@ -115,6 +116,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         sb.append("Gui Settings : " + guiSettings);
         sb.append("\nLocal data file location : " + addressBookFilePath);
         sb.append("\nLocal data file location : " + salesBookFilePath);
+        sb.append("\nLocal data file location : " + salesTimeBookFilePath);
         sb.append("\nLocal data file location : " + ingredientBookFilePath);
 
         return sb.toString();
