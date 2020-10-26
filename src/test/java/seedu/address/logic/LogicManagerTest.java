@@ -52,7 +52,7 @@ public class LogicManagerTest {
                 temporaryFolder.resolve("ingredientBook.json"));
 
         StorageManager storage = new StorageManager(addressBookStorage,
-                salesBookStorage,salesTimeBookStorage, userPrefsStorage, ingredientBookStorage);
+                salesBookStorage, salesTimeBookStorage, userPrefsStorage, ingredientBookStorage);
 
         logic = new LogicManager(model, storage);
     }

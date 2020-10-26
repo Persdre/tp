@@ -32,15 +32,13 @@ class SetAllCommandTest {
     private static final IngredientBook stubBook = new IngredientBook();
     private static final IngredientBook filledBook = new IngredientBook();
 
-<<<<<<< Updated upstream
-    private final Model model = new ModelManager(getTypicalAddressBook(), new SalesBook(),
-=======
+
     private Model model = new ModelManager(getTypicalAddressBook(), new SalesBook(),
             new SalesTimeBook(),
->>>>>>> Stashed changes
             new IngredientBook(), new UserPrefs());
 
-    /*@Test
+    /*
+    @Test
     public void execute_allFieldsSpecified_success() {
 
         SetAllCommand setAllCommand = new SetAllCommand(MILK_AMOUNT, PEARL_AMOUNT,
@@ -86,7 +84,8 @@ class SetAllCommandTest {
         model.setIngredientBook(filledBook);
 
         assertCommandSuccess(setAllCommand, model, expectedMessage, expectedModel);
-    }*/
+    }
+    */
 
     @Test
     public void equals() {

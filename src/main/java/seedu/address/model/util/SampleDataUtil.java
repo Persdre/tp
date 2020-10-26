@@ -102,12 +102,12 @@ public class SampleDataUtil {
     }
 
     public static ReadOnlySalesTimeBook getSampleSalesTimeBook() {
-        SalesTimeBook sampleSTB = new SalesTimeBook();
+        SalesTimeBook sampleST = new SalesTimeBook();
 
-        for(SalesBookEntry sampleSalesBookEntry : getSampleSalesBookEntry()) {
-            sampleSTB.addSalesBookEntry(sampleSalesBookEntry);
+        for (SalesBookEntry sampleSalesBookEntry : getSampleSalesBookEntry()) {
+            sampleST.addSalesBookEntry(sampleSalesBookEntry);
         }
-        return sampleSTB;
+        return sampleST;
     }
 
     public static Ingredient[] getSampleIngredients() {

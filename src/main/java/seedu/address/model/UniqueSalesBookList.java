@@ -179,8 +179,8 @@ public class UniqueSalesBookList implements Iterable<SalesBookEntry> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-				|| (other instanceof UniqueSalesBookList // instanceof handles nulls
-				&& internalList.equals(((UniqueSalesBookList) other).internalList));
+            || (other instanceof UniqueSalesBookList // instanceof handles nulls
+                && internalList.equals(((UniqueSalesBookList) other).internalList));
     }
 
     @Override
