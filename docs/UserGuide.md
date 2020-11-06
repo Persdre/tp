@@ -94,28 +94,6 @@ More examples will be provided for each command in [Section 4 - Features](#4-fea
     - If the command specifies `p/PHONE_NUMBER e/EMERGENCY_CONTACT`, `e/EMERGENCY_CONTACT p/PHONE_NUMBER` is also acceptable.
     
 
-
-## Features <a name="features"></a>
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the command format:**<br>
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `ingredient NAME`, `NAME` is a parameter which can be used as `ingredient milk`.
-
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `...`​ after them can be used once or multiple times.<br>
-  e.g. `sales A/NUM B/NUM C/NUM ...` can be used as `sales BSBM/100` or `sales BSBM/100 BSBBT/120`.
-
-
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-</div>
-
 ### 1. Commands - Sales Tracking <a name="commands-sales-tracking"></a>
 
 <div markdown="span" class="alert alert-primary">
