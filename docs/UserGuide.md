@@ -68,29 +68,6 @@ not be so obvious!
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
-#### 3.2.2. General Symbols and Syntax 
-
-The table below explains the general syntax used throughout the user guide.
-
-| Syntax |  What it means |
-|----------|-------------|
-| `command` |  A grey highlighted block specifies a executable command that can be entered into the command box.  |
-| _italics_ | Italicised text indicates that the text has a definition specific to tCheck, or it is a caption for a Figure in the guide. |
-|<div markdown="block" class="alert alert-info"> :information_source: </div>  | An exclamation mark indicates that the following text is a tip. |
-|<div markdown="block" class="alert alert-danger"> :warning: </div> | A warning sign indicates that the following text is important. |
-
-
-Important cautions that needs to be known before using the feature.
-
-#### 3.2.3. Command Syntax and Usage
-
-The table below explains some important technical terms to help you understand and use commands in Homerce.
-
-| Technical Term | What it means |
-| ---------------| --------------|
-| Command Word | The first word of a command. It determines the action that tCheck should perform. |
-| Prefix | The characters at the start of a parameter. It distinguishes one parameter from another.|
-| Parameter | The word following each prefix. They are values given to a command to perform the specified action.|
 
 **Example:** <br>
 `c-add n/NAME p/PHONE_NUMBER e/EMERGENCY_CONTACT a/ADDRESS [t/TAG] ...`
